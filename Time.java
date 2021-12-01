@@ -159,9 +159,5 @@ public class Time {
         m_millisecond = val;
     }
 
-    public String toString()
-    {
-        return String.format("%s:%02d", toShortTimeString(), m_second);
-    }
 
 }
