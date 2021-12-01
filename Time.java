@@ -167,13 +167,4 @@ public class Time {
         return String.format("%s:%02d", toShortTimeString(), m_second);
     }
 
-    public String toShortTimeString()
-    {
-        return String.format("%02d:%02d", m_hour, m_minute);
-    }
-
-    public String toLongTimeString()
-    {
-        return String.format("%s.%03d", toString(), m_millisecond);
-    }
 }
