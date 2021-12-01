@@ -148,10 +148,7 @@ public class Time {
         m_second = val;
     }
 
-    public int getMillisecond()
-    {
-        return m_millisecond;
-    }
+
 
     public void setMillisecond(int val)
     {
