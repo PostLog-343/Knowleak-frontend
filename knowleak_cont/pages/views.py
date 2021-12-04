@@ -1,6 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic import TemplateView
 
+class HomePageView(TemplateView):
+    template_name = 'index.html'
 
-def index(req):
-    return HttpResponse("<h1>HELLO WORLD</h1>")
+class AboutPageView(TemplateView):
+    template_name = 'about.html'
+
+class ContactPageView(TemplateView):
+    template_name = 'contact.html'
