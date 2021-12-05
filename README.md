@@ -6,7 +6,7 @@ Knowleak is an e-learning project that is developed by Django
     <li>Python</li>
         <h4>How to install python?</h4>
             <ol>
-                <li>Go to official [python page](https://www.python.org)</li>
+                <li>Go to official <a href="https://www.python.org">Python Page</a></li>
                 <li>Download Python 3 and install</li>
                 <li>To be sure about if python installed or not, you can write to console <strong>python -v</strong> .This must give python version.</li>
             </ol>
