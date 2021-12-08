@@ -17,6 +17,12 @@ Knowleak is an e-learning project that is developed by Django
                 <li>Then enter that virtual environment. You can enter <strong>env\Scripts\activate.bat</strong> to the console. You have to be able to see (env) writing beginning of the console path.</li>
                 <li>Then install Django using <strong>py -m pip install Django</strong> command. For control, you can write <strong>django-admin --version</strong> to the console. </li>
             </ol>
+    <li>Pillow (PIL Fork)</li>
+        <p>Pillow is PIL (Python Imaging Library) fork that has extensive file format support, an efficient internal representation, and fairly powerful image processing capabilities.</p>
+        <h4>How to install Pillow?</h4>
+            <ul>
+                <li>Install Pillow using <strong>python3 -m pip install --upgrade Pillow</strong> command.</li>
+            </ul>
 </ul>
 
 <h2>How to start</h2>
