@@ -17,64 +17,51 @@
         </header>
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="post.html">
-                            <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
-                            <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on September 24, 2021
-                        </p>
+            <div class="row gx-4 gx-lg-5 ">
+
+                {% for course in object_list %}
+
+                    <div class="card" style="width: 19rem;">
+                        <img class="card-img-top" src={{course.img}} alt="IMG">
+                        <div class="card-body">
+                            <div class="post-preview">
+                                <a href="post.html">
+                                    <h4 class="post-title">{{course.title}}</h4>
+                                </a>
+                                <h5 class=>{{course.briefInstr}}</h5>
+                                <!--<p class="post-meta">
+                                    Posted by
+                                    <a href="#!">Start Bootstrap</a>
+                                    on September 24, 2021
+                                </p>-->
+                            </div>
                     </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="post.html"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on September 18, 2021
-                        </p>
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="post.html">
-                            <h2 class="post-title">Science has not yet mastered prophecy</h2>
-                            <h3 class="post-subtitle">We predict too much for the next year and yet far too little for the next ten.</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on August 24, 2021
-                        </p>
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="post.html">
-                            <h2 class="post-title">Failure is not an option</h2>
-                            <h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty to future generations.</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on July 8, 2021
-                        </p>
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Pager-->
-                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
                 </div>
+
+                {% endfor %}
+                    <!-- Pager-->
+                <div>
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                        <div class="d-flex justify-content-end mb-4">
+                            <a class="btn btn-primary text-uppercase" href="?page=1">&laquo; first</a>
+                            <a class="btn btn-primary text-uppercase" href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        </div>
+                            
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+
+                        {% if page_obj.has_next %}
+                        <div class="d-flex justify-content-end mb-4">
+                            <a class="btn btn-primary text-uppercase" href="?page={{ page_obj.next_page_number }}">next</a>
+                            <a class="btn btn-primary text-uppercase" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        </div>
+                        {% endif %}
+                    </span>
+                
             </div>
         </div>
 

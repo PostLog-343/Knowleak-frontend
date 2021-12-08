@@ -161,3 +161,7 @@ dmypy.json
 
 # Local History for Visual Studio Code
 .history/
+
+# Local Post Sources
+
+knowleak_cont/static/assets/img/posts
