@@ -151,6 +151,7 @@ dmypy.json
 
 # End of https://www.toptal.com/developers/gitignore/api/django
 
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -160,7 +161,3 @@ dmypy.json
 
 # Local History for Visual Studio Code
 .history/
-
-# Local Post Sources
-
-knowleak_cont/static/assets/img/posts
