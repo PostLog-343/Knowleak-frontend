@@ -18,72 +18,50 @@
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 ">
-                <!-- Post preview-->
-                <div class="card" style="width: 19rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <div class="post-preview">
-                            <a href="post.html">
-                                <h4 >COURSE CARD EXAMPLE</h4>
-                            </a>
-                            <!--<p class="post-meta">
-                                Posted by
-                                <a href="#!">Start Bootstrap</a>
-                                on September 24, 2021
-                            </p>-->
-                        </div>
+
+                {% for course in object_list %}
+
+                    <div class="card" style="width: 19rem;">
+                        <img class="card-img-top" src={{course.img}} alt="IMG">
+                        <div class="card-body">
+                            <div class="post-preview">
+                                <a href="post.html">
+                                    <h4 class="post-title">{{course.title}}</h4>
+                                </a>
+                                <h5 class=>{{course.briefInstr}}</h5>
+                                <!--<p class="post-meta">
+                                    Posted by
+                                    <a href="#!">Start Bootstrap</a>
+                                    on September 24, 2021
+                                </p>-->
+                            </div>
                     </div>
                 </div>
-                <!-- Post preview-->
-                <div class="card" style="width: 19rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <div class="post-preview">
-                            <a href="post.html">
-                                <h4 >COURSE CARD EXAMPLE</h4>
-                            </a>
-                            <!--<p class="post-meta">
-                                Posted by
-                                <a href="#!">Start Bootstrap</a>
-                                on September 24, 2021
-                            </p>-->
-                        </div>
-                    </div>
-                </div>
-                <!-- Post preview-->
-                <div class="card" style="width: 19rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <div class="post-preview">
-                            <a href="post.html">
-                                <h4 >COURSE CARD EXAMPLE</h4>
-                            </a>
-                            <!--<p class="post-meta">
-                                Posted by
-                                <a href="#!">Start Bootstrap</a>
-                                on September 24, 2021
-                            </p>-->
-                        </div>
-                    </div>
-                    </div>
-                <!-- Post preview-->
-                <div class="card" style="width: 19rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <div class="post-preview">
-                            <a href="post.html">
-                                <h4 >COURSE CARD EXAMPLE</h4>
-                            </a>
-                            <!--<p class="post-meta">
-                                Posted by
-                                <a href="#!">Start Bootstrap</a>
-                                on September 24, 2021
-                            </p>-->
-                        </div>
-                    </div>
-                    </div>
+
+                {% endfor %}
                     <!-- Pager-->
-                <div class="d-flex justify-content-end mb-4" style="margin-top: 1.25rem;"><a class="btn btn-primary text-uppercase" href="#!">Load More Course</a></div>
+                <div>
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                        <div class="d-flex justify-content-end mb-4">
+                            <a class="btn btn-primary text-uppercase" href="?page=1">&laquo; first</a>
+                            <a class="btn btn-primary text-uppercase" href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        </div>
+                            
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+
+                        {% if page_obj.has_next %}
+                        <div class="d-flex justify-content-end mb-4">
+                            <a class="btn btn-primary text-uppercase" href="?page={{ page_obj.next_page_number }}">next</a>
+                            <a class="btn btn-primary text-uppercase" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        </div>
+                        {% endif %}
+                    </span>
+                
             </div>
         </div>
 
