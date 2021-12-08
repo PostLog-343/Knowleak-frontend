@@ -21,11 +21,11 @@ Knowleak is an e-learning project that is developed by Django
         <p>Pillow is PIL (Python Imaging Library) fork that has extensive file format support, an efficient internal representation, and fairly powerful image processing capabilities.</p>
         <h4>How to install Pillow?</h4>
             <ul>
-                <li>Install Pillow using <strong>python3 -m pip install --upgrade Pillow</strong> command.</li>
+                <li>Install Pillow using <strong>python -m pip install --upgrade Pillow</strong> command.</li>
             </ul>
 </ul>
 
 <h2>How to start</h2>
-<p>First, you have to enter python environment. Go to folder that has manage.py, then use write <strong>env\Scripts\activate</strong></p>
 </br>
+   <p>Commands that you have to write are <strong>py manage.py makemigrations</strong> -> <strong>py manage.py migrate</strong></p>
 <p>Then write <strong>py manage.py runserver</strong> to console</p>
