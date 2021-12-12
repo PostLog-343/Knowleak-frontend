@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from pages.views import AboutView, IndexView, ContactView
 
 
