@@ -1,5 +1,5 @@
 <h1>Knowleak</h1>
-Knowleak is an e-learning project that is developed by Django
+Knowleak is an e-learning project that is developed by Django and sqLite3 as database container.
 
 <h2>Depencencies</h2>
 <ul>
