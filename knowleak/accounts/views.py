@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic.base import TemplateView
 from . forms import LoginForm, RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -33,7 +34,6 @@ def user_login(request):
     
     return render(request, 'login.html', {'form':form})
 
-
 def user_register(request):
     
     if request.method == 'POST':
@@ -46,7 +46,7 @@ def user_register(request):
     else:
         form = RegisterForm()
 
-    return render(request, 'register.html', {'form':form})
+    return render(request, 'register.html', {'form':form, 'total_students' : User.objects.count()})
 
 
 def user_logout(request):
@@ -65,17 +65,3 @@ def user_dashboard(request):
     }
 
     return render(request, 'dashboard.html', context)
-
-def enroll_the_course(request):
-    course_id = request.POST['course_id']
-    user_id = request.POST['user_id']
-    "course = Course.objects.get(id = course_id)"
-    user = User.objects.get(id = user_id)
-    "course.students.add(user)"
-    return redirect('dashboard')
-
-def release_the_course(request):
-    "course = Course.objects.get(id = request.POST['course_id'])"
-    user = User.objects.get(id = request.POST['user_id'])
-    "course.students.remove(user)"
-    return redirect('dashboard')

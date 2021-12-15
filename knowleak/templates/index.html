@@ -2,57 +2,13 @@
 {% load static %}
 
 {% block content %}
-	
+
 {% include 'carousel.html' %}
-	
-    <div id="overviews" class="section wb">
-        <div class="container">
-            <div class="section-title row text-center">
-                <div class="col-md-8 offset-md-2">
-                    <h3>Latest Courses</h3>
-                    <p class="lead">Lorem Ipsum dolroin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem!</p>
-                </div>
-            </div><!-- end title -->
 
-			{% for course in courses %}
-        
-            <div class="row align-items-center">
+{% include 'latestCourses.html' %}
 
-				{% if not forloop.first %}
-
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="post-media wow fadeIn">
-                        <img src="{{course.image.url}}" alt="" class="img-fluid img-rounded">
-                    </div><!-- end media -->
-                </div><!-- end col -->
-
-				{% endif %}
-
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="message-box">
-                        <h2>{{ course.name }}</h2>
-                        <p>{{course.description}}</p>
-                        <a href="{% url 'course_detail' course.category.slug course.id %}" class="hover-btn-new orange"><span>Learn More</span></a>
-                    </div><!-- end messagebox -->
-                </div><!-- end col -->
-				
-				{% if forloop.first %}
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="post-media wow fadeIn">
-                        <img src="{{course.image.url}}" alt="" class="img-fluid img-rounded">
-                    </div><!-- end media -->
-                </div><!-- end col -->
-
-				{% endif %}
-			</div>
-
-			{% endfor %}
-
-
-
-
-        </div><!-- end container -->
-    </div><!-- end section -->
+{% include 'showStats.html' %}
+ 
 <!--
     <section class="section lb page-section">
 		<div class="container">
@@ -127,30 +83,5 @@
 		</div>
 	</section>
 -->
-	<div class="section cl">
-		<div class="container">
-			<div class="row text-left stat-wrap">
-				<div class="col-md-4 col-sm-4 col-xs-12">
-					<span data-scroll class="global-radius icon_wrap effect-1 alignleft"><i class="flaticon-study"></i></span>
-					<p class="stat_count">{{total_students}}</p>
-					<h3>Students</h3>
-				</div><!-- end col -->
-
-				<div class="col-md-4 col-sm-4 col-xs-12">
-					<span data-scroll class="global-radius icon_wrap effect-1 alignleft"><i class="flaticon-online"></i></span>
-					<p class="stat_count">0</p>
-					<h3>Courses</h3>
-				</div><!-- end col -->
-
-				<div class="col-md-4 col-sm-4 col-xs-12">
-					<span data-scroll class="global-radius icon_wrap effect-1 alignleft"><i class="flaticon-years"></i></span>
-					<p class="stat_count">0</p>
-					<h3>Teachers</h3>
-				</div><!-- end col -->
-			</div><!-- end row -->
-		</div><!-- end container -->
-	</div><!-- end section -->
-
-    
 
 	{% endblock %}
