@@ -15,7 +15,8 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item {% if '/' == request.path %} active {% endif %}"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item {% if 'courses' in request.path %} active {% endif %}"><a class="nav-link" href="#">Courses</a></li>
+                    <li class="nav-item {% if 'courses' in request.path %} active {% endif %}"><a class="nav-link" href="{% url 'courses' %}">Courses</a></li>
+                    <li class="nav-item {% if 'teachers' in request.path %} active {% endif %}"><a class="nav-link" href="{% url 'teachers' %}">Teachers</a></li>
                     {% endif %}				
                     <li class="nav-item {% if 'about' in request.path %} active {% endif %}"><a class="nav-link" href="{% url 'about' %}">About Us</a></li>
                     <li class="nav-item {% if 'contact' in request.path %} active {% endif %}"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
@@ -23,7 +24,7 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     {% if user.is_authenticated %}
-                    <li><a class="hover-btn-new log orange mr-2" href="#"><span>{{user.username}}</span></a></li>
+                    <li><a class="hover-btn-new log orange mr-2" href="{% url 'dashboard' %}"><span>{{user.username}}</span></a></li>
                     <li><a class="hover-btn-new log orange" href="javascript:{document.getElementById('logout').submit()}"><span><i class="fa fa-sign-out"></i></span></a>
                         <form action="{% url 'logout' %}" method="POST" id="logout">
                             {% csrf_token %}
@@ -32,9 +33,10 @@
                     </li>
                     
                     {% else %}
-                        <li><a class="hover-btn-new log orange mr-2" style="display: list-item" href="{% url 'login' %}"><span><i class="fa fa-sign-in"></i></span></a></li>
-                        <li><a class="hover-btn-new log orange" style="display: list-item"href="{% url 'register' %}"><span><i class="fa fa-user-plus"></i></span></a></li>
-                     {% endif %}
+                    <li><a class="hover-btn-new log orange mr-2" href="{% url 'login' %}"><span><i class="fa fa-sign-in"></i></span></a></li>
+                    <li><a class="hover-btn-new log orange" href="{% url 'register' %}"><span><i class="fa fa-user-plus"></i></span></a></li>
+
+                    {% endif %}
                 </ul>
             </div>
         </div>
