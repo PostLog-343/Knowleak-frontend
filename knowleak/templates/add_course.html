@@ -1,0 +1,82 @@
+{% extends 'partials/_base.html' %}
+
+{% block content %}
+
+<form id="add_category" action="{% url 'add_category' %}" method="POST">
+    {% csrf_token %}
+
+</form>
+
+<form id="add_course" action="{% url 'add_courses_post' %}" method="POST">
+    {% csrf_token %}
+</form>
+
+
+        <div id="overviews" class="section wb">
+            <div class="container">
+                <div class="row" style="place-content: center;">
+                    <div class="col-lg-9 blog-post-single">
+        
+                        <div class="input-group mb-3 mt-3">
+                            <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Teachers</label>
+                            </div>
+                            <select class="custom-select"  name="teacher" form="add_course">
+                                {% for teacher in teachers %}
+                                    <option value="{{teacher.name}}">{{teacher.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <select class="custom-select"  name="category" form="add_course">
+                                {% for category in categories %}
+                                    <option value="{{category.name}}">{{category.name}}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-outline-success rounded-0" data-toggle="modal"
+                                data-target="#enrollModal">
+                                <span>Add New Category</span>
+                            </button>
+                            </div>
+                        </div>
+                        <div style="text-align-last:center;margin-top: 10px;">
+                            <input type="submit" value="Submit" class="btn btn-success" form="add_course">
+                        </div>
+                         
+                    </div><!-- end col -->
+                    
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div><!-- end section -->
+
+
+
+<!-- ENROLL Modal -->
+<div class="modal fade" id="enrollModal" tabindex="-1" role="dialog" aria-labelledby="enrollModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="enrollModalLabel">Enroll The Course</h2>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="margin: auto;">
+                <input  name="name" placeholder="Name" form="add_category">
+            </div>
+            <div class="modal-body" style="margin: auto;">
+                <input  name="slug" placeholder="Slug" form="add_category">
+            </div>
+            <div class="modal-footer">
+            
+                <input type="submit" value="ADD" class="btn btn-success" form="add_category">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    CANCEL
+                </button>
+            </div>
+		</div>
+	</div>
+</div>
+{% endblock %}

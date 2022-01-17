@@ -8,12 +8,15 @@
 			<h1>Courses</span></h1>
 		</div>
 	</div>
-	
+	<div class="section-title text-center mt-5 mb-0">
+		<div class="col-md-8 offset-md-3 ">
+			<p>If you see ✓ symbol, it means that you have already enrolled that course but if you see ✗ symbol, it means that you haven't taken that course yet. </p>
+		</div>
+	</div><!-- end title -->
     <div id="overviews" class="section wb">
         <div class="container">
             <div class="row"> 
                 <div class="col-lg-9 blog-post-single">
-					
                     <div class="row"> 
 						{% for course in courses %}
                         <div class="col-lg-6 col-md-6 col-12 mb-4">
@@ -23,15 +26,29 @@
                                 </div>
                                 <div class="course-br">
                                     <div class="course-title">
-                                        <h2><a href="{% url 'course_detail' course.category.slug course.id %}" title="">{{course.name}}</a></h2>
+                                        <h2>
+											<div>
+												<a href="{% url 'course_detail' course.category.slug course.id %}" title="">{{course.name}}</a>
+												<div style="float: right; display: flex;">
+													<div class="mr-3 h6">Count : {{course.students.count}}</div>
+													{% if course in enrolled_courses %}
+														<span class="is_enrolled">✓</span> 
+													{% else %}
+														<span class="is_enrolled">✗</span>
+													{% endif %}
+												</div>
+											</div>
+											
+											
+										</h2>
                                     </div>
                                     <div class="course-desc">
-                                        <p>{{course.description | truncatechars:140}}</p>
+                                        <p>{{course.description }}</p>
                                     </div>
                                 </div>
                                 <div class="course-meta-bot">
                                     <ul>
-                                        <li><i class="fa fa-calendar" aria-hidden="true"></i> {{course.date|date:"d M Y"}}</li>
+                                        <li><i class="fa fa-calendar" aria-hidden="true"></i> {{course.date}}</li>
                                         <li><i class="fa fa-book" aria-hidden="true"></i> {{course.teacher}}</li>
                                     </ul>
                                 </div>
