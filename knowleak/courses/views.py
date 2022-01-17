@@ -1,23 +1,17 @@
 from django.shortcuts import render, get_object_or_404
-from . models import Course, Category, Tag
+from . models import Course, Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from teachers.models import Teacher
 from django.shortcuts import redirect
 
-def course_list(request, category_slug=None, tag_slug=None):
+def course_list(request, category_slug=None):
     category_page = None
-    tag_page = None
     categories = Category.objects.all()
-    tags = Tag.objects.all()
     current_user = request.user
 
     if category_slug != None:
         category_page = get_object_or_404(Category, slug=category_slug)
         courses = Course.objects.filter(available=True, category= category_page)
-
-    elif tag_slug != None:
-        tag_page = get_object_or_404(Tag, slug=tag_slug)
-        courses = Course.objects.filter(available=True, tags=tag_page)
 
     else:
         courses = Course.objects.all().order_by('-date')
@@ -43,7 +37,6 @@ def course_list(request, category_slug=None, tag_slug=None):
         'enrolled_courses': enrolled_courses,
         'user' : current_user,
         'categories': categories,
-        'tags':tags,
         
     }
 
@@ -56,7 +49,6 @@ def course_detail(request, category_slug, course_id):
     course = Course.objects.get(category__slug=category_slug, id = course_id)
     courses = Course.objects.all().order_by('-date') 
     categories = categories = Category.objects.all()
-    tags = Tag.objects.all()
   
 
     if current_user.is_authenticated:
@@ -70,7 +62,6 @@ def course_detail(request, category_slug, course_id):
         'course': course,
         'enrolled_courses': enrolled_courses,
         'categories': categories,
-        'tags': tags,
         'user' : current_user,
     }
     return render(request, 'course.html', context)
@@ -79,25 +70,20 @@ def search(request):
     
     courses = Course.objects.filter(name__contains = request.GET['search'])
     categories = Category.objects.all()
-    tags= Tag.objects.all()
 
     context = {
         'courses': courses,
         'categories': categories,
-        'tags':tags
     }
     return render(request, 'courses.html', context)
 
 def add_course(request):
     teachers = Teacher.objects.all()
     categories = Category.objects.all()
-    tags = Tag.objects.all()
-   
 
     context = {
         'teachers' : teachers,
         'categories' : categories,
-        'tags' : tags
     }
 
 
@@ -105,10 +91,18 @@ def add_course(request):
 
 def add(request):
    
+    name = request.POST.get("name")
     teacher = request.POST.get("teacher")
     category = request.POST.get("category")
+    description = request.POST.get("description")
+    date = request.POST.get("date")
 
-    print(teacher, category)
+    print(name, teacher, category, description, date)
+
+    if(name != None and date != ""):
+        o_ref = Course(name=name,   description = description, date = date)
+        o_ref.save()
+
     return redirect("/courses/add_course/")
 
 def add_category(request):
@@ -122,56 +116,3 @@ def add_category(request):
         o_ref.save()
     
     return redirect("/courses/add_course/")
-
-
-
-def add_tag(request):
-    name = request.POST.get("tag")
-    tags = Tag.objects.all()
-    if(name != None):
-        o_ref = Tag(name=name, slug=name.upper())
-        if o_ref in tags: 
-            o_ref.save()
-
-
-    return redirect('/courses/add_course/')
-
-
-""" def category_list(request, category_slug):
-    courses = Course.objects.all().filter(category__slug=category_slug)
-    categories = Category.objects.all()
-    tags= Tag.objects.all()
-
-    context = {
-        'courses': courses,
-        'categories': categories,
-        'tags':tags
-    }
-
-    return render(request, 'courses.html', context) """
-
-""" def tag_list(request, tag_slug):
-    courses = Course.objects.all().filter(tags__slug=tag_slug)
-    categories = Category.objects.all()
-    tags= Tag.objects.all()
-
-    context = {
-        'courses': courses,
-        'categories': categories,
-        'tags':tags
-    }
-
-    return render(request, 'courses.html', context) """
-
-""" def course_list(request):
-    courses = Course.objects.all().order_by('-date')
-    categories = Category.objects.all()
-    tags= Tag.objects.all()
-
-    context = {
-        'courses': courses,
-        'categories': categories,
-        'tags':tags
-    }
-
-    return render(request, 'courses.html', context) """

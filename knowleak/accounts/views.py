@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from . forms import LoginForm, RegisterForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import  login, logout
+from .backends import MyAuthBackend
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from courses.models import Course
-from django.contrib.auth.models import User
+from .models import User
 
 
 
@@ -15,9 +16,8 @@ def user_login(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(request, username=username,
-                                        password=password)
-
+            user = MyAuthBackend.authenticate(request, username,password)
+            print(user)
             if user is not None:
                 if user.is_active:
                     login(request, user)
@@ -41,9 +41,12 @@ def user_register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Account has been created, You can LOGIN')
+            print("valid")
             return redirect('login')
-    
+        else:
+            print("notvalid")
+            return redirect('login')
+
     else:
         form = RegisterForm()
 

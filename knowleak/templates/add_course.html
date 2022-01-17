@@ -11,12 +11,13 @@
     {% csrf_token %}
 </form>
 
-
         <div id="overviews" class="section wb">
             <div class="container">
                 <div class="row" style="place-content: center;">
                     <div class="col-lg-9 blog-post-single">
-        
+                        <div class="input-group mb-2 mr-sm-2">
+                            <input type="text" class="form-control" form="add_course" name="name" placeholder="Title Of Course">
+                        </div>
                         <div class="input-group mb-3 mt-3">
                             <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Teachers</label>
@@ -35,10 +36,17 @@
                             </select>
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-outline-success rounded-0" data-toggle="modal"
-                                data-target="#enrollModal">
-                                <span>Add New Category</span>
-                            </button>
+                                data-target="#addcategorymodal">
+                                    <span>Add New Category</span>
+                                </button>
                             </div>
+                        </div>
+                       
+                        <div class="input-group mt-3">
+                            <textarea class="form-control" name="description" form="add_course" placeholder="Enter Description" rows="3"></textarea>
+                        </div>
+                        <div class="input-group mt-3">
+                            <input type="date" name="date" form="add_course">
                         </div>
                         <div style="text-align-last:center;margin-top: 10px;">
                             <input type="submit" value="Submit" class="btn btn-success" form="add_course">
@@ -52,13 +60,13 @@
 
 
 
-<!-- ENROLL Modal -->
-<div class="modal fade" id="enrollModal" tabindex="-1" role="dialog" aria-labelledby="enrollModalLabel"
+<!-- Add Category Modal -->
+<div class="modal fade" id="addcategorymodal" tabindex="-1" role="dialog" aria-labelledby="addcategorymodalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="enrollModalLabel">Enroll The Course</h2>
+                <h2 class="modal-title" id="addcategorymodalLabel">Enter New Category</h2>
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
@@ -79,4 +87,6 @@
 		</div>
 	</div>
 </div>
+
+
 {% endblock %}
