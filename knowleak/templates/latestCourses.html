@@ -25,7 +25,7 @@
                 <div class="message-box">
                     <h2>{{ course.name }}</h2>
                     <p>{{course.description}}</p>
-                    <a href="{% url 'course_detail' course.category.slug course.id %}" class="hover-btn-new orange"><span>Learn More</span></a>
+                    <a href="{% url 'course_detail' course.id %}" class="hover-btn-new orange"><span>Learn More</span></a>
                 </div><!-- end messagebox -->
             </div><!-- end col -->
             

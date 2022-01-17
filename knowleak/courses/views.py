@@ -3,16 +3,16 @@ from . models import Course, Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from accounts.models import User
 from django.shortcuts import redirect
-from django.contrib.auth import get_user_model
+from .zoom import createMeeting
+from django.contrib import messages
 
-
-def course_list(request, category_slug=None):
+def course_list(request, category_name=None):
     category_page = None
     categories = Category.objects.all()
     current_user = request.user
 
-    if category_slug != None:
-        category_page = get_object_or_404(Category, slug=category_slug)
+    if category_name != None:
+        category_page = get_object_or_404(Category, slug=category_name)
         courses = Course.objects.filter(available=True, category= category_page)
 
     else:
@@ -46,9 +46,9 @@ def course_list(request, category_slug=None):
 
 
 
-def course_detail(request, category_slug, course_id):
+def course_detail(request,  course_id):
     current_user = request.user
-    course = Course.objects.get(category__slug=category_slug, id = course_id)
+    course = Course.objects.get(id = course_id)
     courses = Course.objects.all()
     categories = categories = Category.objects.all()
     token = course.token
@@ -110,17 +110,29 @@ def add(request):
     name = request.POST.get("name")
     teacher = request.user
     x = request.POST.get("category")
-    category = Category.objects.get(name=x)
+    if x:
+        category = Category.objects.get(name=x)
+    else:
+        category = None
+
     description = request.POST.get("description")
     token = request.POST.get("token")
         
 
     print(name, teacher, category, description, token)
-    if(name != None and teacher != None):
+    if(name != None and teacher != None and category != None):
         o_ref = Course(name=name, teacher=teacher,category = category,  description = description, token=token)
-        o_ref.save()
+        if o_ref:
+            informations = createMeeting()
+            o_ref.zoom_link = informations[0]
+            o_ref.zoom_password = informations[1]
+            o_ref.save()
+            
+
     else:
         print("no")
+        messages.info(request, 'Check Your Username and Password')
+
    
     return redirect("/courses/add_course/")
 
@@ -135,3 +147,4 @@ def add_category(request):
         o_ref.save()
     
     return redirect("/courses/add_course/")
+

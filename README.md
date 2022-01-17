@@ -24,7 +24,7 @@ Knowleak is an e-learning project that is developed by Django and sqLite3 as dat
                 <li>Install Pillow using <strong>python -m pip install --upgrade Pillow</strong> command.</li>
             </ul>
 </ul>
-
+pyjwt / requests
 <h2>How to start</h2>
 </br>
    <p>Commands that you have to write are <strong>py manage.py makemigrations</strong> -> <strong>py manage.py migrate</strong></p>

@@ -64,7 +64,15 @@
 							</blockquote>
 							<blockquote class="default">
 								{% if course in enrolled_courses %}
-								<span>{{zoomlink}}</span>
+								<div style="display: flex;">
+									<p></p>
+									<a href="{{course.zoom_link}}" target="_blank">Zoom link</a>
+								</div>
+								<div style="display: flex;">
+									<p>Password : </p>
+									<span>{{course.zoom_password}}</span>
+								</div>
+								
 								{% else %}
 									<span>Zoom Link Will Be Displayed Here!!!</span>
 								{% endif %}
