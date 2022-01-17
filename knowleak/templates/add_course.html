@@ -18,16 +18,7 @@
                         <div class="input-group mb-2 mr-sm-2">
                             <input type="text" class="form-control" form="add_course" name="name" placeholder="Title Of Course">
                         </div>
-                        <div class="input-group mb-3 mt-3">
-                            <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Teachers</label>
-                            </div>
-                            <select class="custom-select"  name="teacher" form="add_course">
-                                {% for teacher in teachers %}
-                                    <option value="{{teacher.name}}">{{teacher.name}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
+                        
                         <div class="input-group">
                             <select class="custom-select"  name="category" form="add_course">
                                 {% for category in categories %}
@@ -47,6 +38,15 @@
                         </div>
                         <div class="input-group mt-3">
                             <input type="date" name="date" form="add_course">
+                            <input class="ml-2" type="time" id="appt" name="appt" form="add_course" value="00:00" required>
+                            <div class="ml-1" style="align-self: center;">
+                                <label for="quantity">Token :</label>
+                                <input type="number" name="token" form="add_course" min="0" value="0">
+                           </div>
+                           <div class="mb-4 ml-2" style="width: 300px; ">
+                            <label for="formFile" class="form-label"></label>
+                            <input class="form-control" type="file" id="formFile" name="image" form="add_course" accept=".jpeg, .svg, .gif">
+                          </div>
                         </div>
                         <div style="text-align-last:center;margin-top: 10px;">
                             <input type="submit" value="Submit" class="btn btn-success" form="add_course">

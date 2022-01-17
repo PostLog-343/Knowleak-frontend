@@ -46,6 +46,8 @@ class User(AbstractBaseUser,PermissionsMixin):
     password = models.CharField(max_length=150)
     email = models.EmailField(_('email address'), unique=True)
     start_date = models.DateTimeField(default=timezone.now)
+    token = models.IntegerField(default=0)
+
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
@@ -53,8 +55,8 @@ class User(AbstractBaseUser,PermissionsMixin):
     
     objects = CustomAccountManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
     def __str__(self):
         return self.username

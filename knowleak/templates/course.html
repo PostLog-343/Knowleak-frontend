@@ -19,6 +19,7 @@
 					</div>
 					<div class="post-content">
 						<div class="post-date">
+							
 							{% if user.is_authenticated %}
 
 								{% if course in enrolled_courses %}
@@ -35,40 +36,44 @@
 							{% endif %}
 						</div>
 						<div class="meta-info-blog">
-							<span><i class="fa fa-calendar"></i> {{course.date}}</span>
+							<!-- <span><i class="fa fa-calendar"></i> {{course.date}}</span> -->
 							<span> <p>Number Of Students :{{course.students.count}} </p> </span>
+							<span> <p>{{coin_willbepaid}} ⓚ </p> </span>
 						</div>
 						<div class="blog-title">
 							<h2><a href="#" title="">{{course.name}}</a></h2>
 						</div>
 						<div class="blog-desc">
+							<p>Teacher Information</p>
+							<blockquote class="default">
+								<div>
+									<h3 class="mr-2">{{course.teacher.username}}</h3>
+								</div>
+								<div style="display: flex;">
+									<h5 class="mr-2">{{course.teacher.first_name}}</h5>
+									<h5>{{course.teacher.last_name}}</h5>
+								</div>
+								
+							</blockquote>
+							<p>Course Description</p>
 
 							<blockquote class="default">
-								{{course.description}}
+								<div>
+									{{course.description}}
+								</div>
 							</blockquote>
-
+							<blockquote class="default">
+								{% if course in enrolled_courses %}
+								<span>{{zoomlink}}</span>
+								{% else %}
+									<span>Zoom Link Will Be Displayed Here!!!</span>
+								{% endif %}
+							</blockquote>
 						</div>
 					</div>
 				</div>
 
-				<div class="blog-author">
-					<div class="author-bio">
-						<h3 class="author_name"><a
-								href="{% url 'teacher_detail' course.teacher.pk %}">{{course.teacher.name}}</a></h3>
-						<h5>{{course.teacher.title}}</h5>
-						<p class="author_det">
-							{{course.teacher.description}}
-						</p>
-					</div>
-					<div class="author-desc">
-						<img src="{{course.teacher.image.url}}" alt="about author">
-						<ul class="author-social">
-							<li><a href="{{course.teacher.facebook}}"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="{{course.teacher.twitter}}"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="{{course.teacher.linkedin}}"><i class="fa fa-linkedin"></i></a></li>
-						</ul>
-					</div>
-				</div>
+				
 
 
 			</div><!-- end col -->
@@ -77,66 +82,87 @@
 	</div><!-- end container -->
 </div><!-- end section -->
 
-
-<!-- ENROLL Modal -->
-<div class="modal fade" id="enrollModal" tabindex="-1" role="dialog" aria-labelledby="enrollModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h2 class="modal-title" id="enrollModalLabel">Enroll The Course</h2>
-				<button type="button" class="close" data-dismiss="modal">
-					<span>&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<p>You will enroll the course below:</p>
-				<h1>{{course.name}}</h1>
-			</div>
-			<div class="modal-footer">
-				<form action="{% url 'enroll_the_course' %}" method="POST">
-					{% csrf_token %}
-					<input type="hidden" name="user_id" value="{{user.id}}">
-					<input type="hidden" name="course_id" value="{{course.id}}">
-					<input type="submit" value="I AM SURE" class="btn btn-success">
-				</form>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">
-					CANCEL
-				</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- RELEASEModal -->
-<div class="modal fade" id="releaseModal" tabindex="-1" role="dialog" aria-labelledby="releaseModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h2 class="modal-title" id="releaseModalLabel">Enroll The Course</h2>
-				<button type="button" class="close" data-dismiss="modal">
-					<span>&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<p>You will release the course below:</p>
-				<h1>{{course.name}}</h1>
-			</div>
-			<div class="modal-footer">
-				<form action="{% url 'release_the_course' %}" method="POST">
-					{% csrf_token %}
-					<input type="hidden" name="user_id" value="{{user.id}}">
-					<input type="hidden" name="course_id" value="{{course.id}}">
-					<input type="submit" value="I AM SURE" class="btn btn-danger">
-				</form>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">
-					CANCEL
-				</button>
+{% if can_enrolled %}
+	<!-- ENROLL Modal -->
+	<div class="modal fade" id="enrollModal" tabindex="-1" role="dialog" aria-labelledby="enrollModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title" id="enrollModalLabel">Enroll The Course</h2>
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>You will enroll the course below:</p>
+					<h1>{{course.name}}</h1>
+					<div style="display: flex;">
+						<h2>KnowCoin that you have to pay is:</h2>
+						<h1>{{coin_willbepaid}}</h1>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<form action="{% url 'enroll_the_course' %}" method="POST">
+						{% csrf_token %}
+						<input type="hidden" name="user_id" value="{{user.id}}">
+						<input type="hidden" name="course_id" value="{{course.id}}">
+						<input type="submit" value="I AM SURE" class="btn btn-success">
+					</form>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">
+						CANCEL
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+	<!-- RELEASEModal -->
+	<div class="modal fade" id="releaseModal" tabindex="-1" role="dialog" aria-labelledby="releaseModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title" id="releaseModalLabel">Enroll The Course</h2>
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>You will release the course below:</p>
+					<h1>{{course.name}}</h1>
+				</div>
+				<div class="modal-footer">
+					<form action="{% url 'release_the_course' %}" method="POST">
+						{% csrf_token %}
+						<input type="hidden" name="user_id" value="{{user.id}}">
+						<input type="hidden" name="course_id" value="{{course.id}}">
+						<input type="submit" value="I AM SURE" class="btn btn-danger">
+					</form>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">
+						CANCEL
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+{% else %}
+	<div class="modal fade" id="enrollModal" tabindex="-1" role="dialog" aria-labelledby="enrollModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<h1>Not Enough Coin</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}
 
 
 {% endblock %}

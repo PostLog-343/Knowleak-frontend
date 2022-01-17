@@ -70,6 +70,9 @@ def user_dashboard(request):
 
     return render(request, 'dashboard.html', context)
 
+    
+
+
 def enroll_the_course(request):
     course_id = request.POST['course_id']
     user_id = request.POST['user_id']
