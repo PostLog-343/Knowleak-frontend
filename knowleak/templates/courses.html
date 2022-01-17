@@ -28,7 +28,7 @@
                                     <div class="course-title">
                                         <h2>
 											<div>
-												<a href="{% url 'course_detail' course.category.slug course.id %}" title="">{{course.name}}</a>
+												<a href="{% url 'course_detail' course.category.name course.id %}" title="">{{course.name}}</a>
 												<div style="float: right; display: flex;">
 													<div class="mr-3 h6">Count : {{course.students.count}}</div>
 													{% if course in enrolled_courses %}

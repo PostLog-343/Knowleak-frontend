@@ -3,7 +3,8 @@ from . models import Course, Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from accounts.models import User
 from django.shortcuts import redirect
-import datetime
+from django.contrib.auth import get_user_model
+
 
 def course_list(request, category_slug=None):
     category_page = None
@@ -15,7 +16,7 @@ def course_list(request, category_slug=None):
         courses = Course.objects.filter(available=True, category= category_page)
 
     else:
-        courses = Course.objects.all().order_by('-year', 'month', 'day')
+        courses = Course.objects.all()
 
     page = request.GET.get('page', 1)
     paginator = Paginator(courses, 2)
@@ -107,21 +108,21 @@ def add_course(request):
 def add(request):
    
     name = request.POST.get("name")
-    teacher = request.user.get_username()
-    category = request.POST.get("category")
+    teacher = request.user
+    x = request.POST.get("category")
+    category = Category.objects.get(name=x)
     description = request.POST.get("description")
     token = request.POST.get("token")
+        
 
-
-    print(name, teacher, category, description, date,appt, token)
-    return redirect("/courses/add_course/")
-"""
-    if(name != None and date != ""):
-        o_ref = Course(name=name, teacher=teacher,  description = description, date = date)
+    print(name, teacher, category, description, token)
+    if(name != None and teacher != None):
+        o_ref = Course(name=name, teacher=teacher,category = category,  description = description, token=token)
         o_ref.save()
     else:
-        print("no")"""
+        print("no")
    
+    return redirect("/courses/add_course/")
 
 def add_category(request):
     
