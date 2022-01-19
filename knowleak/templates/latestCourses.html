@@ -6,37 +6,38 @@
                 <p class="lead">Lorem Ipsum dolroin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem!</p>
             </div>
         </div><!-- end title -->
-
+      
         {% for course in courses %}
-    
-        <div class="row align-items-center">
+        <div style="text-align:-webkit-center;">
+            <div class="align-items-center ">
 
-            {% if not forloop.first %}
+                {% if not forloop.first %}
 
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                <div class="post-media wow fadeIn">
-                    <img src="{{course.image.url}}" alt="" class="img-fluid img-rounded">
-                </div><!-- end media -->
-            </div><!-- end col -->
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <div class="post-media wow fadeIn">
+                        <img src="{{course.image.url}}" alt="" class="img-fluid img-rounded">
+                    </div><!-- end media -->
+                </div><!-- end col -->
 
-            {% endif %}
+                {% endif %}
 
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="background-color:#eea412">
-                <div class="message-box">
-                    <h2>{{ course.name }}</h2>
-                    <p>{{course.description}}</p>
-                </div><!-- end messagebox -->
-            </div><!-- end col -->
-            
-            {% if forloop.first %}
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                <div class="post-media wow fadeIn">
-                    <img src="{{course.image.url}}" alt="" class="img-fluid img-rounded">
-                </div><!-- end media -->
-            </div><!-- end col -->
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="background-color:#eea412">
+                    <div class="message-box">
+                        <h2>{{ course.name }}</h2>
+                        <p>{{course.description}}</p>
+                    </div><!-- end messagebox -->
+                </div><!-- end col -->
+                
+                {% if forloop.first %}
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <div class="post-media wow fadeIn">
+                        <img src="{{course.image.url}}" alt="" class="img-fluid img-rounded">
+                    </div><!-- end media -->
+                </div><!-- end col -->
 
-            {% endif %}
+                {% endif %}
         </div>
+       </div>
 
         {% endfor %}
 

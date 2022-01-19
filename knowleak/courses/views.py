@@ -117,11 +117,10 @@ def add(request):
 
     description = request.POST.get("description")
     token = request.POST.get("token")
-        
+    image = request.POST.get("image")
 
-    print(name, teacher, category, description, token)
     if(name != None and teacher != None and category != None):
-        o_ref = Course(name=name, teacher=teacher,category = category,  description = description, token=token)
+        o_ref = Course(name=name, teacher=teacher,category = category,  description = description, token=token, image=image)
         if o_ref:
             informations = createMeeting()
             o_ref.zoom_link = informations[0]

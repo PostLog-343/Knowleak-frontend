@@ -1,1 +1,1 @@
-web: gunicorn knowleak.wsgi
+web: gunicorn knowleak.wsgi --log-file -

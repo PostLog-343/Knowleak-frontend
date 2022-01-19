@@ -15,7 +15,7 @@ class Course(models.Model):
     category = models.ForeignKey(Category, null=True, on_delete=models.DO_NOTHING)
     students = models.ManyToManyField(User, blank=True, related_name='courses_joined')
     description = models.TextField(blank=True, null=True)
-    image = models.ImageField(blank=True, upload_to="courses\%Y\%m\%d", default="courses/default_course_image.jpg")
+    image = models.ImageField(blank=True, upload_to="courses", default="courses/default_course_image.jpg")
     token = models.IntegerField()
     zoom_link=models.TextField(null=True)
     zoom_password=models.TextField(null=True)

@@ -40,10 +40,10 @@ def user_register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            print("valid")
+            messages.info(request, 'Registered')
             return redirect('login')
         else:
-            print("notvalid")
+            messages.info(request, 'Wrong Informations')
             return redirect('login')
 
     else:
