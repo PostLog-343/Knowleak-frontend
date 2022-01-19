@@ -1,1 +1,1 @@
-web: gunicorn knowleak/knowleak/wsgi.py --log-file -
+web: gunicorn knowleak/knowleak/wsgi:application --log-file -
