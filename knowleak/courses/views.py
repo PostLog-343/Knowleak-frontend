@@ -19,7 +19,7 @@ def course_list(request, category_name=None):
         courses = Course.objects.all()
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(courses, 2)
+    paginator = Paginator(courses, 4)
 
     try:
         courses = paginator.page(page)

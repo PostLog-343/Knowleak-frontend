@@ -1701,10 +1701,6 @@ a img.aligncenter {
 	margin-bottom: 30px;
 }
 
-.message-box{
-	padding: 20px 0px;
-}
-
 .service-widget h3 {
     font-size: 21px;
     color: #ffffff;
@@ -1746,7 +1742,6 @@ a img.aligncenter {
 .message-box p {
     margin-bottom: 20px;
 }
-
 .message-box .lead {
     padding-top: 10px;
     font-size: 19px;

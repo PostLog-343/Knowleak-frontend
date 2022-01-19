@@ -53,7 +53,8 @@ def user_register(request):
     return render(request, 'register.html', {'form':form})
 
 def update_profile(request):
-    
+    form = RegisterForm()
+
 
     return render(request, 'update_profile.html', {'form':form})
 
