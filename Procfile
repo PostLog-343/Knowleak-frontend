@@ -1,1 +1,3 @@
-web: gunicorn knowleak/knowleak/wsgi:application --log-file -
+web:gunicorn knowleak.wsgi:application --log-file - --log-level debug
+python manage.py collectstatic --noinput
+manage.py migrate
