@@ -16,8 +16,7 @@ def user_login(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = MyAuthBackend.authenticate(request, username,password)
-            print(user)
+            user = MyAuthBackend.authenticate(username,password)
             if user is not None:
                 if user.is_active:
                     login(request, user)
@@ -63,7 +62,6 @@ def user_logout(request):
     return redirect('index')
 
 
-@login_required(login_url='login')
 def user_dashboard(request):
     current_user = request.user
 

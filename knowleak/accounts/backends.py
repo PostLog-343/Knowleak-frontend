@@ -3,7 +3,7 @@ import logging
 
 
 class MyAuthBackend(object):
-    def authenticate(self, username, password):    
+    def authenticate(username, password):    
         try:
             user = User.objects.get(username=username)
             if user.check_password(password):
