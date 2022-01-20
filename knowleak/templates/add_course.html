@@ -7,7 +7,7 @@
 
 </form>
 
-<form id="add_course" action="{% url 'add_courses_post' %}" method="POST">
+<form id="add_course" enctype="multipart/form-data" action="{% url 'add_courses_post' %}" method="POST">
     {% csrf_token %}
 </form>
 
@@ -18,7 +18,15 @@
                         <div class="input-group mb-2 mr-sm-2">
                             <input type="text" class="form-control" form="add_course" name="name" placeholder="Title Of Course">
                         </div>
-                        
+                        {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-{{message.tags}}">
+
+                                {{message}}
+                            </div>
+                        {% endfor %}
+
+                        {% endif %}
                         <div class="input-group">
                             <select class="custom-select"  name="category" form="add_course">
                                 {% for category in categories %}
@@ -42,8 +50,7 @@
                                 <input type="number" name="token" form="add_course" min="0" value="0">
                            </div>
                            <div class="mb-4 ml-2" style="width: 300px; ">
-                            <label for="formFile" class="form-label"></label>
-                            <input class="form-control" type="file" id="formFile" name="image" form="add_course" accept=".jpeg, .svg, .gif">
+                            <input class="form-control" type="file" id="image" name="image" form="add_course" accept=".jpeg, .svg, .gif">
                           </div>
                         </div>
                         <div style="text-align-last:center;margin-top: 10px;">

@@ -1,4 +1,7 @@
+from cmath import pi
 from django.shortcuts import render, get_object_or_404
+from django.core.files.storage import FileSystemStorage
+from courses.forms import FileForm
 from . models import Course, Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from accounts.models import User
@@ -96,41 +99,52 @@ def search(request):
 def add_course(request):
     teachers = User.objects.filter(is_teacher=True)
     categories = Category.objects.all()
+    form = FileForm()
+    if request.method == 'POST':
+        form = FileForm(request.POST,request.FILES)
 
+        if form.is_valid():
+            form.save()
+            return redirect('success')
     context = {
         'teachers' : teachers,
         'categories' : categories,
+        'form' : form
     }
 
 
     return render(request, 'add_course.html', context)
 
+
+
 def add(request):
-   
-    name = request.POST.get("name")
-    teacher = request.user
-    x = request.POST.get("category")
-    if x:
-        category = Category.objects.get(name=x)
-    else:
-        category = None
+    print(request.FILES)
+    if request.method == 'POST' :
+        name = request.POST.get("name")
+        teacher = request.user
+        x = request.POST.get("category")
+        if x:
+            category = Category.objects.get(name=x)
+        else:
+            category = None
 
-    description = request.POST.get("description")
-    token = request.POST.get("token")
-    image = request.POST.get("image")
-
-    if(name != None and teacher != None and category != None):
-        o_ref = Course(name=name, teacher=teacher,category = category,  description = description, token=token, image=image)
-        if o_ref:
-            informations = createMeeting()
-            o_ref.zoom_link = informations[0]
-            o_ref.zoom_password = informations[1]
-            o_ref.save()
+        description = request.POST.get("description")
+        token = request.POST.get("token")
+        fileform = FileForm(request.POST, request.FILES)
+        if fileform.is_valid():
+            image = fileform.cleaned_data["image"]
             
-
-    else:
-        print("no")
-        messages.info(request, 'Check Your Username and Password')
+        if(name != None and teacher != None and category != None):
+            o_ref = Course(name=name, teacher=teacher,category = category,  description = description, token=token, image=image)
+            if o_ref:
+                """informations = createMeeting()
+                o_ref.zoom_link = informations[0]
+                o_ref.zoom_password = informations[1]"""
+                o_ref.save()
+                
+        else:
+            print("no")
+            messages.info(request, 'Name, Teacher or Category information is missing')
 
    
     return redirect("/courses/add_course/")
