@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from locale import currency
+from django.shortcuts import redirect, render
 
 # Create your views here.
 from django.shortcuts import render
@@ -10,6 +11,8 @@ from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
+
+from accounts.models import User
 
 api_key = 'sandbox-etkBOaBAec7Zh6jLDL59Gng0xJV2o1tV'
 secret_key = 'sandbox-uC9ysXfBn2syo7ZMOW2ywhYoc9z9hTHh'
@@ -23,15 +26,6 @@ options = {
 }
 sozlukToken = list()
 
-
-def index(request):
-    context = dict()
-
-    context['message'] = 'Django ile Iyzico Ödeme Entegrasyonu'
-
-
-    template = 'payment_index.html'
-    return render(request, template, context)
 
 
 def payment(request):
@@ -96,7 +90,7 @@ def payment(request):
         'currency': 'TRY',
         'basketId': 'B67832',
         'paymentGroup': 'PRODUCT',
-        "callbackUrl": "http://localhost:8008/payment/result/",
+        "callbackUrl": "http://localhost:8000/payment/result/",
         "enabledInstallments": ['2', '3', '6', '9'],
         'buyer': buyer,
         'shippingAddress': address,
@@ -165,9 +159,14 @@ def result(request):
 def success(request):
     context = dict()
     context['success'] = 'İşlem Başarılı'
+    user = request.user
+    currentUser = User.objects.get(username=user)
+    token = currentUser.token   
 
-    template = 'ok.html'
-    return render(request, template, context)
+    currentUser.token = token + 5
+    currentUser.save()
+
+    return redirect('index')
 
 
 def fail(request):

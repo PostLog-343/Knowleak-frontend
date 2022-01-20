@@ -14,6 +14,10 @@ class ContactForm(forms.ModelForm):
         'class': 'form-control',
         'placeholder': 'Your Email'
     }))
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Username'
+    }))
     phone = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'Your Phone'
@@ -25,4 +29,4 @@ class ContactForm(forms.ModelForm):
 
     class Meta:
         model = Contact
-        fields =  ['first_name', 'last_name', 'email', 'phone', 'message']
+        fields =  ['first_name', 'last_name', 'email','username', 'phone', 'message']

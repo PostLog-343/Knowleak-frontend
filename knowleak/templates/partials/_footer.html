@@ -23,7 +23,9 @@
                     </div>
                     <ul class="footer-links">
                         <li><a href="{% url 'index' %}">Home</a></li>
+                        {% if user.is_authenticated %}  
                         <li><a href="{% url 'courses' %}">Courses</a></li>
+                        {% endif %}
                         <li><a href="{% url 'about' %}">About</a></li>
                         <li><a href="{% url 'contact' %}">Contact</a></li>
                     </ul><!-- end links -->
