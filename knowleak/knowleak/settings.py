@@ -17,7 +17,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 # Application definition
-
+CLEAR_CACHE_ON_RESTART = True
 INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',
@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pages.apps.PagesConfig',
     'courses.apps.CoursesConfig',
+    'payment.apps.PaymentConfig',
 ]
 
 

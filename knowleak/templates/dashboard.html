@@ -21,19 +21,21 @@
 						{% endfor %}
 
 					{% endif %}
-					<div class="col-lg-12 text-center">
-						<button type="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block" style="padding: 10px 45% 10px 40%;" data-toggle="modal"
-						data-target="#updateProfileModal">
-							<span>Update Profile</span>
-						</button>
-					</div>
-					<div class="blog-author">
-						<div class="author-bio">
-							<h2 class="author_name">{{ user.first_name }} {{ user.last_name }}</h3>
-
+					
+					<div class="blog-author text-center mb-4" >
+						<div >
+							<h2 class="author_name" style="padding-top: 10px;">{{ user.first_name }} {{ user.last_name }}</h3>
 						</div>
 					</div>
-					
+					<div class="col-lg-12 text-center">
+						<a type="submit" class="btn btn-secondary btn-radius btn-brd btn-block" style="color: white;" data-toggle="modal"
+						data-target="#updateProfileModal">
+							<span >Update Profile</span>
+						</a>
+						<a class="btn btn-secondary btn-radius btn-brd btn-block" href={% url 'change_password' %}>
+							<span>Change Password</span>
+						</a>
+					</div>
 					
                 </div><!-- end col -->
             </div><!-- end row -->
@@ -118,9 +120,9 @@ aria-hidden="true">
 					</div>
 
 						<div class="row">							
-							<div class="col-sm-10">
-							  <input type="submit" value="Update" class="btn btn-light btn-radius btn-brd grd1">
-							</div>
+							<button type="submit"  class="btn colo btn-primary btn-radius btn-brd btn-block">
+								<span>Update Profile</span>
+							</button>
 						</div>
 					</form>
 				</div>

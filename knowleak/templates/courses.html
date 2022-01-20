@@ -8,6 +8,14 @@
 			<h1>Courses</span></h1>
 		</div>
 	</div>
+	{% if messages %}
+		{% for message in messages %}
+			<div class="alert alert-{{message.tags}}">
+				{{message}}
+			</div>
+		{% endfor %}
+
+	{% endif %}
 	<div class="section-title text-center mt-5 mb-0">
 		<div class="col-md-8 offset-md-3 ">
 			<p>If you see ✓ symbol, it means that you have already enrolled that course but if you see ✗ symbol, it means that you haven't taken that course yet. </p>
@@ -21,8 +29,8 @@
 						{% for course in courses %}
                         <div class="col-lg-6 col-md-6 col-12 mb-4">
                             <div class="course-item">
-                                <div class="image-blog">
-                                    <img src="{{course.image.url}}" alt="" class="img-fluid">
+                                <div class="image-blog text-center">
+                                    <img src="{{course.image.url}}"  alt="" class="img-fluid">
                                 </div>
                                 <div class="course-br">
                                     <div class="course-title">

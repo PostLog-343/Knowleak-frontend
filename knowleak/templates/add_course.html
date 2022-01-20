@@ -15,18 +15,18 @@
             <div class="container">
                 <div class="row" style="place-content: center;">
                     <div class="col-lg-9 blog-post-single">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{message.tags}}">
+
+                                    {{message}}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                         <div class="input-group mb-2 mr-sm-2">
                             <input type="text" class="form-control" form="add_course" name="name" placeholder="Title Of Course">
                         </div>
-                        {% if messages %}
-                            {% for message in messages %}
-                            <div class="alert alert-{{message.tags}}">
-
-                                {{message}}
-                            </div>
-                        {% endfor %}
-
-                        {% endif %}
+                        
                         <div class="input-group">
                             <select class="custom-select"  name="category" form="add_course">
                                 {% for category in categories %}

@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from . forms import EditProfileForm, LoginForm, RegisterForm
+from . forms import EditProfileForm, LoginForm, RegisterForm, PasswordChangeForm
 from django.contrib.auth import  login, logout
 from .backends import MyAuthBackend
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from courses.models import Course
 from .models import User
-
+from django.contrib.auth import update_session_auth_hash
 
 
 def user_login(request):
@@ -43,7 +43,7 @@ def user_register(request):
             messages.info(request, 'Registered')
             return redirect('login')
         else:
-            messages.info(request, 'Wrong Informations')
+            messages.warning(request, 'Wrong Informations')
             return redirect('login')
 
     else:
@@ -51,13 +51,6 @@ def user_register(request):
 
     return render(request, 'register.html', {'form':form})
 
-def update_profile(request):
-    current_user = request.user
-
-    form = EditProfileForm()
-
-
-    return render(request, 'update_profile.html', {'form':form})
 
 def user_logout(request):
     logout(request)
@@ -69,9 +62,11 @@ def user_dashboard(request):
     courses = current_user.courses_joined.all()
 
     if request.method == 'POST':
+        
         form = EditProfileForm(request.POST, instance=current_user)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Profile Updated')
             return redirect('dashboard')
         else:
             messages.info(request, 'Invalid Information')
@@ -87,7 +82,31 @@ def user_dashboard(request):
 
     return render(request, 'dashboard.html', context)
 
-    
+def change_password(request):
+    current_user = request.user
+
+    if request.method == 'POST':
+        
+        form = PasswordChangeForm(data=request.POST, user=current_user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, 'Password Updated')
+            return redirect('dashboard')
+        else:
+            messages.info(request, 'Invalid Password')
+            return redirect('change_password')
+
+    else:
+        form = PasswordChangeForm(user=current_user)
+        
+    context = {
+        'form' : form
+    }
+
+    return render(request, 'change_password.html', context)
+
+     
 
 
 def enroll_the_course(request):

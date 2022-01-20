@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     {% if user.is_authenticated %}
-                        <li><a class="hover-btn-new log orange mr-2"><span>{{user.token}} ⓚ </span></a></li> 
+                        <li><a href="{% url 'payment_index' %}" class="hover-btn-new log orange mr-2"><span>{{user.token}} ⓚ </span></a></li> 
                     {% endif %}  
                     {% if user.is_teacher %}
                         <li><a class="hover-btn-new log orange mr-2" href="{% url 'add_course' %}"><span>+ Add Course</span></a></li>           
