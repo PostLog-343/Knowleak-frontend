@@ -113,10 +113,10 @@ USE_TZ = True
 PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 STATIC_ROOT  =   os.path.join(PROJECT_ROOT, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # MEDIA FILES
 
@@ -124,7 +124,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'accounts.User'
-ALLOWED_HOSTS = ['knowleak1.herokuapp.com']
 
 
 import dj_database_url 
