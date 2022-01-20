@@ -1,6 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from accounts.models import User
+from django.utils.translation import gettext_lazy  as _
 
 
 class LoginForm(forms.Form):
@@ -43,11 +44,22 @@ class RegisterForm(UserCreationForm):
         'class': 'form-control',
         'placeholder': 'Re-Type Password'
     }))
-
     class Meta:
         model = User
         fields = ['first_name','last_name', 'username', 'email', 'password1', 'password2']
 
+
+class EditProfileForm(UserChangeForm):
+    
+    
+    class Meta:
+        model = User
+        fields = (
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+        )
 
 
 """ from django import forms

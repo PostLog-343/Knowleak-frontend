@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from . forms import LoginForm, RegisterForm
+from . forms import EditProfileForm, LoginForm, RegisterForm
 from django.contrib.auth import  login, logout
 from .backends import MyAuthBackend
 from django.contrib import messages
@@ -52,7 +52,9 @@ def user_register(request):
     return render(request, 'register.html', {'form':form})
 
 def update_profile(request):
-    form = RegisterForm()
+    current_user = request.user
+
+    form = EditProfileForm()
 
 
     return render(request, 'update_profile.html', {'form':form})
@@ -64,11 +66,23 @@ def user_logout(request):
 
 def user_dashboard(request):
     current_user = request.user
-
     courses = current_user.courses_joined.all()
 
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=current_user)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+        else:
+            messages.info(request, 'Invalid Information')
+            return redirect('dashboard')
+
+    else:
+        form = EditProfileForm(instance=current_user)
+        
     context = {
-        'courses': courses
+        'courses': courses,
+        'form' : form
     }
 
     return render(request, 'dashboard.html', context)
