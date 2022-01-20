@@ -10,7 +10,6 @@ defusedxml
 dj-database-url
 dj-static
 Django
-django-allauth
 django-toolbelt
 gunicorn
 idna
