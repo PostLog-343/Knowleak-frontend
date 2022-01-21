@@ -3,6 +3,7 @@ import logging
 
 
 class MyAuthBackend(object):
+    #Function of authenticate for login case.
     def authenticate(username, password):    
         try:
             user = User.objects.get(username=username)
@@ -15,7 +16,8 @@ class MyAuthBackend(object):
         except Exception as e:
             logging.getLogger("error_logger").error(repr(e))
             return None
-
+    
+    # Function of find user:
     def get_user(self, user_id):
         try:
             user = User.objects.get(sys_id=user_id)

@@ -27,7 +27,7 @@ options = {
 sozlukToken = list()
 
 
-
+# Main payment function
 def payment(request):
     context = dict()
 
