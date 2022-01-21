@@ -1,7 +1,7 @@
 from django.urls import path, include
 from . import views
 
-
+# Add google path
 urlpatterns = [
     path('login/', views.user_login, name="login"),
     path('google/', include('allauth.urls')),
