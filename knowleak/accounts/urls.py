@@ -1,10 +1,12 @@
 from django.urls import path, include
 from . import views
 
-
+# Add google path
 urlpatterns = [
     path('login/', views.user_login, name="login"),
+    path('google/', include('allauth.urls')),
     path('register/', views.user_register, name="register"),
+    path('profile/', views.user_dashboard, name="profile"),
     path('dashboard/', views.user_dashboard, name="dashboard"),
     path('logout/', views.user_logout, name="logout"),
     path('change-password/', views.change_password, name="change_password"), 

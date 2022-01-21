@@ -19,7 +19,7 @@ def user_login(request):
             user = MyAuthBackend.authenticate(username,password)
             if user is not None:
                 if user.is_active:
-                    login(request, user)
+                    login(request, user, backend='django.contrib.auth.backends.ModelBackend')
                     return redirect('index')
 
                 else:
