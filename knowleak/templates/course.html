@@ -22,8 +22,9 @@
 							
 							{% if user.is_authenticated %}
 								{% if is_teacher %}
-								<button type="submit" class="btn btn-outline-danger rounded-0"
-								<span>DELETE COURSE</span>
+								<button type="submit" class="btn btn-outline-danger rounded-0" 
+									<span>DELETE COURSE</span>
+								</button>	
 								{% else %}
 									{% if course in enrolled_courses %}
 									<button type="submit" class="btn btn-outline-danger rounded-0" data-toggle="modal"
@@ -67,7 +68,7 @@
 								</div>
 							</blockquote>
 							<blockquote class="default">
-								{% if course in enrolled_courses or user in teachers %}
+								{% if course in enrolled_courses or is_teacher %}
 									<div style="display: flex;">
 										<p></p>
 										<a href="{{course.zoom_link}}" target="_blank">Zoom link</a>

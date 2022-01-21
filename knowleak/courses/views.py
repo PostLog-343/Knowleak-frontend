@@ -57,6 +57,9 @@ def course_detail(request,  course_id):
     token = course.token
     user_token = current_user.token
     student_count = course.students.count()
+
+    teacher = course.teacher
+    is_teacher = (current_user == teacher)
     
     if student_count != 0:
         coin_willbepaid = token/student_count
@@ -81,7 +84,8 @@ def course_detail(request,  course_id):
         'categories': categories,
         'user' : current_user,
         'can_enrolled' : can_enrolled,
-        'coin_willbepaid' : coin_willbepaid
+        'coin_willbepaid' : coin_willbepaid,
+        'is_teacher' : is_teacher
     }
     return render(request, 'course.html', context)
 

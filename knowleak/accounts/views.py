@@ -59,7 +59,9 @@ def user_logout(request):
 
 def user_dashboard(request):
     current_user = request.user
-    courses = current_user.courses_joined.all()
+    all_courses = current_user.courses_joined.all()
+    courses_of_teacher = Course.objects.filter(teacher=current_user)
+    teachers = User.objects.filter(is_teacher=True)
 
     if request.method == 'POST':
         
@@ -76,7 +78,9 @@ def user_dashboard(request):
         form = EditProfileForm(instance=current_user)
         
     context = {
-        'courses': courses,
+        'courses_of_teacher': courses_of_teacher,
+        'all_courses' : all_courses,
+        'teachers' : teachers,
         'form' : form
     }
 
