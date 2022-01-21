@@ -1,5 +1,10 @@
+{% extends 'partials/_base.html' %}
+{% load static %}
+{% load socialaccount %}
+
 
 {% block content %}
+
 
 <div class="modal fade show" id="logreg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -69,7 +74,7 @@
     </div>
   </div>
 
-  {% include 'index.html' %}
+{% include 'carousel.html' %}
 
 </div>
 

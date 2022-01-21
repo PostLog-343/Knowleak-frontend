@@ -9,7 +9,7 @@ class MyAuthBackend(object):
             if user.check_password(password):
                 return user
             else:
-                return None
+                return None 
         except User.DoesNotExist:
             return None
         except Exception as e:
