@@ -17,7 +17,7 @@
 
 	{% endif %}
 	<div class="section-title text-center mt-5 mb-0">
-		<div class="col-md-8 offset-md-3 ">
+		<div class="col-md-8 offset-md-2 ">
 			<p>If you see ✓ symbol, it means that you have already enrolled that course but if you see ✗ symbol, it means that you haven't taken that course yet. </p>
 		</div>
 	</div><!-- end title -->
@@ -54,10 +54,12 @@
                                         <p>{{course.description }}</p>
                                     </div>
                                 </div>
-                                <div class="course-meta-bot">
-                                    <ul>
-                                        <li><i class="fa fa-book" aria-hidden="true"></i> {{course.teacher}}</li>
-                                    </ul>
+                                <div class="course-meta-bot" style="display: flex;">
+									<div style="display: flex;">
+										<i style="padding:6px 2px 0 0;" class="fa fa-book " aria-hidden="true" ></i> 
+										<p>{{course.teacher}}</p>
+									</div>
+									<p style="margin-left: auto;">{{course.token}}Ⓚ</p>
                                 </div>
                             </div>
                         </div><!-- end col -->

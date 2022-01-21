@@ -119,6 +119,8 @@ def enroll_the_course(request):
     course = Course.objects.get(id = course_id)
     user = User.objects.get(id = user_id)
     course.students.add(user)
+    user.token -= course.token
+    user.save()
     return redirect('dashboard')
 
 def release_the_course(request):
