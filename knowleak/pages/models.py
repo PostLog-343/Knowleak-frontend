@@ -1,5 +1,6 @@
 from django.db import models
 
+# Class of contact back-end:
 class Contact(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
