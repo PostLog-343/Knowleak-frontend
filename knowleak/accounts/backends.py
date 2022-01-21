@@ -1,7 +1,7 @@
 from accounts.models import User
 import logging
 
-
+# Class of authentication back-end
 class MyAuthBackend(object):
     #Function of authenticate for login case.
     def authenticate(username, password):    
