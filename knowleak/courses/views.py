@@ -120,43 +120,46 @@ def add_course(request):
 def add(request):
     print(request.FILES)
     if request.method == 'POST' :
-        name = request.POST.get("name")
-        teacher = request.user
-        x = request.POST.get("category")
-        if x:
-            category = Category.objects.get(name=x)
-        else:
-            category = None
-
-        description = request.POST.get("description")
-        token = request.POST.get("token")
+       
         fileform = FileForm(request.POST, request.FILES)
         if fileform.is_valid():
+            name = request.POST.get("name")
+            teacher = request.user
+            x = request.POST.get("category")
+            if x:
+                category = Category.objects.get(name=x)
+            else:
+                category = None
+
+            description = request.POST.get("description")
+            token = request.POST.get("token")
             image = fileform.cleaned_data["image"]
             
-            if(name != None and teacher != None and category != None):
+            if(name == (None or "") or image == None or description == (None or "")):
+                messages.info(request, 'Name, Category or Description information is missing')
+            else:
                 o_ref = Course(name=name, teacher=teacher,category = category,  description = description, token=token, image=image)
                 if o_ref:
                     """informations = createMeeting()
                     o_ref.zoom_link = informations[0]
                     o_ref.zoom_password = informations[1]"""
                     o_ref.save()
-                
+                    messages.success(request, 'Course Created!')
         else:
-            messages.info(request, 'Name or Category information is missing')
-
+                messages.warning(request, 'Empty Image')
    
     return redirect("/courses/add_course/")
 
 def add_category(request):
     
     name = request.POST.get("name")
-    slug = request.POST.get("slug")
-    print(name, slug)
+    print(name)
     
-    if(name != None and slug != None):
-        o_ref = Category(name=name, slug=slug.lower())
+    if(name != (None or "")):
+        o_ref = Category(name=name, slug=name.lower())
         o_ref.save()
-    
+    else:
+        messages.warning(request, 'Empty Category Name')
+
     return redirect("/courses/add_course/")
 
