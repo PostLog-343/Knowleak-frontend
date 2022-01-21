@@ -21,17 +21,21 @@
 						<div class="post-date">
 							
 							{% if user.is_authenticated %}
-
-								{% if course in enrolled_courses %}
-								<button type="submit" class="btn btn-outline-danger rounded-0" data-toggle="modal"
-									data-target="#releaseModal">
-									<span>RELEASE</span>
-								</button>
+								{% if is_teacher %}
+								<button type="submit" class="btn btn-outline-danger rounded-0"
+								<span>DELETE COURSE</span>
 								{% else %}
-								<button type="submit" class="btn btn-outline-success rounded-0" data-toggle="modal"
-									data-target="#enrollModal">
-									<span>ENROLL</span>
-								</button>
+									{% if course in enrolled_courses %}
+									<button type="submit" class="btn btn-outline-danger rounded-0" data-toggle="modal"
+										data-target="#releaseModal">
+										<span>RELEASE</span>
+									</button>
+									{% else %}
+									<button type="submit" class="btn btn-outline-success rounded-0" data-toggle="modal"
+										data-target="#enrollModal">
+										<span>ENROLL</span>
+									</button>
+									{% endif %}
 								{% endif %}
 							{% endif %}
 						</div>
@@ -63,16 +67,15 @@
 								</div>
 							</blockquote>
 							<blockquote class="default">
-								{% if course in enrolled_courses %}
-								<div style="display: flex;">
-									<p></p>
-									<a href="{{course.zoom_link}}" target="_blank">Zoom link</a>
-								</div>
-								<div style="display: flex;">
-									<p>Password : </p>
-									<span>{{course.zoom_password}}</span>
-								</div>
-								
+								{% if course in enrolled_courses or user in teachers %}
+									<div style="display: flex;">
+										<p></p>
+										<a href="{{course.zoom_link}}" target="_blank">Zoom link</a>
+									</div>
+									<div style="display: flex;">
+										<p>Password : </p>
+										<span>{{course.zoom_password}}</span>
+									</div>
 								{% else %}
 									<span>Zoom Link Will Be Displayed Here!!!</span>
 								{% endif %}
