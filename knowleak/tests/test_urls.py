@@ -4,6 +4,7 @@ from accounts.views import user_login, user_register, user_dashboard, user_logou
 from courses.views import course_list,course_detail, search, add_course, add_category, add
 from pages.views import IndexView, AboutView, ContactView
 
+# For URL Tests:
 class TestUrls(SimpleTestCase):
 
     def test_user_login(self):
